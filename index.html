@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rahmatxon va Madina — To'yga Taklif</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-dim: #8a6f2e;
+      --dark: #080808;
+      --dark2: #101010;
+      --dark3: #181818;
+      --text: #F0EAD6;
+      --text-muted: #8a7f68;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      width: 100%;
+      background: var(--dark2);
+      border: 1px solid #222;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 120px rgba(201,168,76,0.07), 0 40px 80px rgba(0,0,0,0.8);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-dim) 20%, var(--gold-light) 50%, var(--gold-dim) 80%, transparent 100%);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 44px 44px 36px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.05) 0%, transparent 70%);
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    .names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 8vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(140deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-dim) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .amp {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.75em;
+      opacity: 0.7;
+      display: block;
+      margin: 4px 0;
+    }
+
+    .invite-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+      margin-top: 14px;
+    }
+
+    .invite-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── BODY ── */
+    .body {
+      padding: 36px 44px;
+    }
+
+    /* Info rows */
+    .info-grid {
+      display: grid;
+      gap: 1px;
+      background: #1c1c1c;
+      border: 1px solid #1c1c1c;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--dark2);
+      padding: 16px 18px;
+      transition: background 0.2s;
+    }
+
+    .info-row:hover { background: var(--dark3); }
+
+    .info-icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid #2c2c2c;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      background: var(--dark3);
+    }
+
+    .info-label {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .info-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Schedule pills */
+    .schedule {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .pill {
+      background: var(--dark3);
+      border: 1px solid #2a2a2a;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill span { color: var(--gold); font-weight: 600; }
+
+    /* ── COUNTDOWN ── */
+    .countdown-wrap {
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .cd-unit {
+      text-align: center;
+      background: var(--dark3);
+      border: 1px solid #202020;
+      border-radius: 3px;
+      padding: 18px 6px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cd-unit::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+      opacity: 0.5;
+    }
+
+    .cd-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 6vw, 38px);
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 6px;
+      transition: transform 0.12s cubic-bezier(.36,.07,.19,.97), color 0.12s;
+    }
+
+    .cd-number.bump {
+      transform: scale(1.2);
+      color: #fff;
+    }
+
+    .cd-name {
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 13px 10px;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .btn-fill {
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+      border: 1px solid transparent;
+      color: var(--dark);
+    }
+
+    .btn-fill:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0;
+      color: #2a2a2a;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #1e1e1e;
+    }
+
+    .divider-icon { color: var(--gold-dim); font-size: 14px; }
+
+    /* ── NOTE ── */
+    .note {
+      background: var(--dark3);
+      border: 1px solid #1e1e1e;
+      border-left: 2px solid var(--gold-dim);
+      border-radius: 2px;
+      padding: 14px 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .note strong { color: var(--text); }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 20px 44px 30px;
+      text-align: center;
+      border-top: 1px solid #141414;
+    }
+
+    .ornament {
+      color: var(--gold-dim);
+      font-size: 16px;
+      letter-spacing: 8px;
+      opacity: 0.4;
+      margin-bottom: 10px;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* finished */
+    .finished-msg {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    @media (max-width: 480px) {
+      .header, .body, .footer { padding-left: 22px; padding-right: 22px; }
+      .btn-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="card">
+  <div class="header">
+    <div class="eyebrow">Sizni to'yimizga taklif etamiz</div>
+    <div class="names">
+      Rahmatxon
+      <span class="amp">&amp;</span>
+      Madina
+    </div>
+    <div class="invite-text">
+      Aziz mehmon, siz bilan birga bu <strong>muborak kunni</strong><br>
+      nishonlashdan baxtiyormiz — tashrif buyuring!
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- Info -->
+    <div class="info-grid">
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div class="info-content">
+          <div class="info-label">Sana</div>
+          <div class="info-value">
+            15-iyul, 2026-yil — Chorshanba
+            <div class="schedule">
+              <span class="pill"><span>06:30</span> — Ertalab osh</span>
+              <span class="pill"><span>17:30</span> — Kechki ziyofat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏛</div>
+        <div class="info-content">
+          <div class="info-label">To'yxona</div>
+          <div class="info-value">
+            Жозиба (Joziba) to'yxonasi
+            <span class="info-sub">Toshkent sh., Sag'bon ko'chasi, 212</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-wrap">
+      <div class="section-label">To'ygacha qolgan vaqt</div>
+      <div class="countdown" id="countdown">
+        <div class="cd-unit">
+          <div class="cd-number" id="cd-days">—</div>
+          <div class="cd-name">Kun</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-number" id="cd-hours">—</div>
+          <div class="cd-name">Soat</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-number" id="cd-mins">—</div>
+          <div class="cd-name">Daqiqa</div>
+        </div>
+        <div class="cd-unit">
+          <div class="cd-number" id="cd-secs">—</div>
+          <div class="cd-name">Soniya</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-row">
+      <a class="btn btn-outline"
+         href="https://yandex.ru/maps/org/joziba/238281083491"
+         target="_blank">
+        🗺 Xaritada ko'rish
+      </a>
+      <a class="btn btn-outline"
+         href="https://yandex.ru/maps/10335/tashkent/house/sag_bon_ko_chasi_212/YkAYdARgSUcDQFprfX91dXpkZA==/"
+         target="_blank">
+        🧭 Yo'l ko'rsatish
+      </a>
+    </div>
+
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="note">
+      <strong>Tashrif buyurishingizni tasdiqlab,</strong> quyidagi raqamga murojaat qiling:<br>
+      📞 <strong>+998 __ ___ __ __</strong> — (raqamni kiriting)
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="ornament">✦ ✦ ✦</div>
+    <div class="footer-text">Ishtirokingiz biz uchun eng katta sharaf!</div>
+  </div>
+</div>
+
+<script>
+  // ── Countdown (ertalab osh vaqti: 06:30 ga) ──
+  const EVENT = new Date('2026-07-15T06:30:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function bump(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+    setTimeout(() => el.classList.remove('bump'), 180);
+  }
+
+  let prev = { d: -1, h: -1, m: -1, s: -1 };
+
+  function tick() {
+    const now  = new Date();
+    const diff = EVENT - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML =
+        '<div class="finished-msg">To\'y boshlandi! 🎉</div>';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    if (s !== prev.s) { document.getElementById('cd-secs').textContent  = pad(s); bump('cd-secs');  prev.s = s; }
+    if (m !== prev.m) { document.getElementById('cd-mins').textContent  = pad(m); bump('cd-mins');  prev.m = m; }
+    if (h !== prev.h) { document.getElementById('cd-hours').textContent = pad(h); bump('cd-hours'); prev.h = h; }
+    if (d !== prev.d) { document.getElementById('cd-days').textContent  = pad(d); bump('cd-days');  prev.d = d; }
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  // ── Particles ──
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Dot {
+    constructor(init) {
+      this.x = Math.random() * (W || 800);
+      this.y = init ? Math.random() * (H || 600) : (H || 600) + 10;
+      this.r = Math.random() * 1.4 + 0.4;
+      this.speed = Math.random() * 0.35 + 0.08;
+      this.alpha = Math.random() * 0.2 + 0.04;
+      this.drift = (Math.random() - 0.5) * 0.25;
+    }
+    update() {
+      this.y -= this.speed;
+      this.x += this.drift;
+      if (this.y < -10) { Object.assign(this, new Dot(false)); }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  const dots = Array.from({ length: 70 }, (_, i) => new Dot(i < 35));
+
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    dots.forEach(d => { d.update(); d.draw(); });
+    requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>
